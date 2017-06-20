@@ -28,7 +28,10 @@ RUN set -ex; \
 
 COPY dockerd-entrypoint.sh /usr/local/bin/
 
-VOLUME /var/lib/docker
+RUN apk add --no-cache bash
+COPY wait-for-it.sh /usr/local/bin/
+
+VOLUME /run/context
 EXPOSE 2375
 
 ENTRYPOINT ["dockerd-entrypoint.sh"]
